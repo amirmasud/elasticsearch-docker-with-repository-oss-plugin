@@ -8,6 +8,17 @@ This dockerfile uses [elasticsearch-repository-oss](https://github.com/zhichen/e
 
 For `standard` flavor of elasticsearch (which is shipped with X-Pack and some codes under Elastic licenses) use master branch.
 
+___
+
+### Other Elasticsearch Plugins
+
+If you want to install other Elasticsearch plugins as well, you can build dockerfile with `PLUGINS` build argument.
+it accepts a space-separated list of plugins.
+
+```
+docker build . -t elasticsearch-oss:s3-plus-other-plugins --build-arg PLUGINS="plugin_1 plugin_2 plugin_3"
+```
+
 ### CREDITS
 ______
  This dockerfile is originally written by [@aramalipoor](https://github.com/aramalipoor)
