@@ -1,5 +1,7 @@
 FROM docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.0
 
+ARG PLUGINS=''
+
 USER root
 
 RUN yum install -y unzip
@@ -11,6 +13,8 @@ RUN curl -L https://github.com/zhichen/elasticsearch-repository-oss/releases/dow
     sed -i "/version=5.5.3/c version=6.3.0" /usr/share/elasticsearch/plugins/repository-oss/plugin-descriptor.properties && \
     sed -i '/isolated=/d' /usr/share/elasticsearch/plugins/repository-oss/plugin-descriptor.properties && \
     sed -i '/jvm=/d' /usr/share/elasticsearch/plugins/repository-oss/plugin-descriptor.properties
+
+RUN for plugin in $PLUGINS; do elasticsearch-plugin install -b $plugin; done
 
 USER elasticsearch
 
